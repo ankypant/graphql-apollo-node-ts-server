@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "rootDirs": ["./src/index.ts"],
+    "outDir": "./dist",
+    "target": "es5",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"]
+  },
+  "exclude": ["./test"]
+}
