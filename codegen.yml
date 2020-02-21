@@ -1,0 +1,9 @@
+schema: ./src/schema.graphql
+generates:
+  ./src/models/types.ts:
+    plugins:
+      - add: // tslint:disable
+      - typescript
+      - typescript-resolvers
+    config:
+      immutableTypes: true
