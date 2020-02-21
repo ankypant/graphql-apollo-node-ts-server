@@ -1,27 +1,23 @@
+import axios from 'axios';
 import { Employee } from '../models/types';
 
-let employee: Employee[] = [
-  {
-    name: 'Ankit Pant',
-    email: 'ankit12.pant@gmail.com'
-  }
-];
+const API_URL = 'http://localhost:3000';
 
 export async function getEmployeeDetails(): Promise<Employee[]> {
-  return employee;
+  const response = await axios.get(`${API_URL}/employees`);
+  return response.data;
 }
 
 export async function updateEmployeeDetails(
+  id: number,
   name: string,
   email: string
 ): Promise<Employee> {
-  const newEmployee: Employee = {
-    name,
-    email
-  };
-  // push to global array
-  employee.push(newEmployee);
-
-  // return new employee details
-  return newEmployee;
+  return (
+    await axios.post(`${API_URL}/employees`, {
+      id,
+      name,
+      email
+    })
+  ).data;
 }
