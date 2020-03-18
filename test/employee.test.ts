@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 import { query, mutation } from './common';
 
 describe('employee', () => {
@@ -11,7 +11,7 @@ describe('employee', () => {
           }
         }`);
     const { employee } = response.body.data;
-    expect(employee).not.toBeNull();
+    expect(employee).toMatchSnapshot();
   });
 
   it('should add employee', async () => {
@@ -23,6 +23,7 @@ describe('employee', () => {
       }
     }`);
     const { employee } = response.body.data;
-    expect(employee).not.toBeNull();
+    expect(employee).toMatchSnapshot();
+    axios.delete('http://localhost:3000/employees/2');
   });
 });

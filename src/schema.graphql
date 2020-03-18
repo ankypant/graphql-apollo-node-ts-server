@@ -10,13 +10,13 @@ type Query {
 }
 
 type Mutation {
-  employeeDetails(id: Int, name: String, email: String): Employee!
+  employeeDetails(name: String!, email: String!): Employee!
 }
 
 type Employee {
   id: Int!
   name: String!
-  email: String
+  email: String!
 }
 
 # input EmployeeDetails {
