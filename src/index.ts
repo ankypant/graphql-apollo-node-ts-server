@@ -1,50 +1,45 @@
+import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
+import { resolvers } from './resolvers';
 import { importSchema } from 'graphql-import';
 import { formatError } from './util/format-error';
-const bodyParser = require('body-parser');
-const express = require('express');
-
+import {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+  ApolloServerPluginLandingPageDisabled
+} from 'apollo-server-core';
 require('dotenv').config();
 
-import { resolvers } from './resolvers';
-const typeDefs = importSchema('./src/schema.graphql');
+async function startApolloServer() {
+  const server = new ApolloServer({
+    typeDefs: importSchema('./src/schema.graphql'),
+    resolvers,
+    formatError: formatError,
+    plugins: [
+      process.env.NODE_ENV === 'production'
+        ? ApolloServerPluginLandingPageDisabled()
+        : ApolloServerPluginLandingPageGraphQLPlayground()
+    ]
+  });
 
-const portNumber: number = 4000;
+  await server.start();
 
-const server = new ApolloServer({
-  tracing: true,
-  typeDefs,
-  resolvers,
-  formatError: formatError,
-  playground: {
-    settings: {
-      'request.credentials': 'include'
-    }
-  },
-  introspection: true
-});
+  const app = express();
 
-console.log('starting for NODE_ENV', portNumber);
+  // Additional middleware can be mounted at this point to run before Apollo.
 
-const app = express();
+  // Mount Apollo middleware here.
+  server.applyMiddleware({ app, path: '/graphql' });
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(require('cookie-parser')());
+  // Modified server startup
+  return app.listen(process.env.PORT_NUMBER);
+}
 
-server.applyMiddleware({ app, path: '/graphql' });
-
-let serverStarted = false;
-
-app.listen({ port: portNumber }, () => {
-  console.log(`Apollo Server on http://localhost:${portNumber}/graphql`);
-  serverStarted = true;
-});
-
-app.get('/infra/healthcheck', (req, res, next) => {
-  if (serverStarted) {
-    return res.status(200).json({ status: 'UP' });
-  } else {
-    return res.status(503).json({ status: 'STARTING' });
-  }
-});
+startApolloServer()
+  .then(__ =>
+    console.log(
+      `🚀 Server ready at http://localhost:${process.env.PORT_NUMBER}/graphql`
+    )
+  )
+  .catch(error => {
+    console.error(error);
+  });
