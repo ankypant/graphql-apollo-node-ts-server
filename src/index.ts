@@ -7,13 +7,14 @@ import {
   ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginLandingPageDisabled
 } from 'apollo-server-core';
+
 require('dotenv').config();
 
 async function startApolloServer() {
   const server = new ApolloServer({
     typeDefs: importSchema('./src/schema.graphql'),
     resolvers,
-    formatError: formatError,
+    formatError,
     plugins: [
       process.env.NODE_ENV === 'production'
         ? ApolloServerPluginLandingPageDisabled()
@@ -41,5 +42,5 @@ startApolloServer()
     )
   )
   .catch(error => {
-    console.error(error);
+    console.error('An Error occurred while starting the server', error);
   });
