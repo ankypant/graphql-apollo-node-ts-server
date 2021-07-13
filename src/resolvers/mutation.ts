@@ -1,8 +1,8 @@
 import { MutationResolvers } from '../models/types';
-import { updateEmployeeDetails } from '../services/employee.service';
+import { addEmployeeDetails } from '../services/employee.service';
 
 export const mutationResolvers: MutationResolvers = {
-  async employeeDetails(__, args) {
-    return updateEmployeeDetails(args.name, args.email);
+  async addEmployee(__, args) {
+    return addEmployeeDetails(args.name, args.email);
   }
 };

@@ -5,7 +5,7 @@ export async function getEmployeeDetails(): Promise<Employee[]> {
   return (await axios.get(`${process.env.API_URL}/employees`)).data;
 }
 
-export async function updateEmployeeDetails(
+export async function addEmployeeDetails(
   name: string,
   email: string
 ): Promise<Employee> {
@@ -15,7 +15,7 @@ export async function updateEmployeeDetails(
   });
 
   return {
-    id: Math.random(),
+    id: Math.random().toString(26).slice(2),
     name,
     email
   };

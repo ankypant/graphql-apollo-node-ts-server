@@ -1,0 +1,24 @@
+# Write your query or mutation here
+query getEmployees {
+  employee {
+    id
+    name
+    email
+  }
+}
+
+mutation addEmployee($name: String!, $email: String!) {
+  employeeDetails(name: $name, email: $email) {
+    id
+    name
+    email
+  }
+}
+
+
+Query variables at the bottom of the playground
+
+{
+  "name": "Temp User",
+  "email": "temp@user.com"
+}

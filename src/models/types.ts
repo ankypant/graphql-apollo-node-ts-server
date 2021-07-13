@@ -17,25 +17,30 @@ export type Scalars = {
 
 export type Employee = {
   readonly __typename?: 'Employee';
-  readonly id: Scalars['Int'];
+  readonly id: Scalars['String'];
+  readonly name: Scalars['String'];
+  readonly email: Scalars['String'];
+};
+
+export type EmployeeDetails = {
   readonly name: Scalars['String'];
   readonly email: Scalars['String'];
 };
 
 export type Mutation = {
   readonly __typename?: 'Mutation';
-  readonly employeeDetails: Employee;
+  readonly addEmployee: Employee;
 };
 
 
-export type MutationEmployeeDetailsArgs = {
+export type MutationAddEmployeeArgs = {
   name: Scalars['String'];
   email: Scalars['String'];
 };
 
 export type Query = {
   readonly __typename?: 'Query';
-  readonly employee: ReadonlyArray<Maybe<Employee>>;
+  readonly getEmployees: ReadonlyArray<Maybe<Employee>>;
 };
 
 
@@ -123,8 +128,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Employee: ResolverTypeWrapper<Employee>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  EmployeeDetails: EmployeeDetails;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -134,8 +139,8 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   DateTime: Scalars['DateTime'];
   Employee: Employee;
-  Int: Scalars['Int'];
   String: Scalars['String'];
+  EmployeeDetails: EmployeeDetails;
   Mutation: {};
   Query: {};
   Boolean: Scalars['Boolean'];
@@ -146,18 +151,18 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 }
 
 export type EmployeeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Employee'] = ResolversParentTypes['Employee']> = {
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  employeeDetails?: Resolver<ResolversTypes['Employee'], ParentType, ContextType, RequireFields<MutationEmployeeDetailsArgs, 'name' | 'email'>>;
+  addEmployee?: Resolver<ResolversTypes['Employee'], ParentType, ContextType, RequireFields<MutationAddEmployeeArgs, 'name' | 'email'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  employee?: Resolver<ReadonlyArray<Maybe<ResolversTypes['Employee']>>, ParentType, ContextType>;
+  getEmployees?: Resolver<ReadonlyArray<Maybe<ResolversTypes['Employee']>>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {

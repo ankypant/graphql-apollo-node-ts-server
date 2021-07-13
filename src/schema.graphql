@@ -6,20 +6,20 @@ schema {
 }
 
 type Query {
-  employee: [Employee]!
+  getEmployees: [Employee]!
 }
 
 type Mutation {
-  employeeDetails(name: String!, email: String!): Employee!
+  addEmployee(name: String!, email: String!): Employee!
 }
 
 type Employee {
-  id: Int!
+  id: String!
   name: String!
   email: String!
 }
 
-# input EmployeeDetails {
-#   name: String!
-#   email: String
-# }
+input EmployeeDetails {
+  name: String!
+  email: String!
+}
