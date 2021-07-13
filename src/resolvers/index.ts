@@ -1,7 +1,7 @@
-import { Resolvers } from "../models/types";
+import { Resolvers } from '../models/types';
 
-import { queryResolvers } from "./query";
-import { mutationResolvers } from "./mutation";
+import { queryResolvers } from './query';
+import { mutationResolvers } from './mutation';
 
 export const resolvers: Resolvers = {
   Query: queryResolvers,

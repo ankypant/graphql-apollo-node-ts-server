@@ -11,11 +11,12 @@ export async function updateEmployeeDetails(
 ): Promise<Employee> {
   await axios.post(`${process.env.API_URL}/employees`, {
     name,
-    email,
+    email
   });
 
   return {
+    id: Math.random(),
     name,
-    email,
+    email
   };
 }
