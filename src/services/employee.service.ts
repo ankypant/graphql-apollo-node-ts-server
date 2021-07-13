@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { Employee } from '../models/types';
 
-export async function getEmployeeDetails(): Promise<Employee[]> {
+export async function getEmployeesDetails(): Promise<Employee[]> {
   return (await axios.get(`${process.env.API_URL}/employees`)).data;
+}
+
+export async function getEmployeeData(id: string): Promise<Employee> {
+  return (await axios.get(`${process.env.API_URL}/employees/${id}`)).data;
 }
 
 export async function addEmployeeDetails(

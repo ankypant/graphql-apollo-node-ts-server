@@ -41,6 +41,12 @@ export type MutationAddEmployeeArgs = {
 export type Query = {
   readonly __typename?: 'Query';
   readonly getEmployees: ReadonlyArray<Maybe<Employee>>;
+  readonly getEmployee: Employee;
+};
+
+
+export type QueryGetEmployeeArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -163,6 +169,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   getEmployees?: Resolver<ReadonlyArray<Maybe<ResolversTypes['Employee']>>, ParentType, ContextType>;
+  getEmployee?: Resolver<ResolversTypes['Employee'], ParentType, ContextType, RequireFields<QueryGetEmployeeArgs, 'id'>>;
 };
 
 export type Resolvers<ContextType = any> = {

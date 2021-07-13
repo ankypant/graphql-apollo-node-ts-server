@@ -1,6 +1,14 @@
 # Write your query or mutation here
 query getEmployees {
-  employee {
+   getEmployees{
+    id
+    name
+    email
+  }
+}
+
+query getEmployee($id: String!) {
+  getEmployee(id: $id) {
     id
     name
     email
@@ -8,17 +16,17 @@ query getEmployees {
 }
 
 mutation addEmployee($name: String!, $email: String!) {
-  employeeDetails(name: $name, email: $email) {
+  addEmployee(name: $name, email: $email) {
     id
     name
     email
   }
 }
 
-
 Query variables at the bottom of the playground
 
 {
   "name": "Temp User",
-  "email": "temp@user.com"
+  "email": "temp@user.com",
+  "id": "1"
 }
