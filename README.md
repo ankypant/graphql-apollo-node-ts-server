@@ -7,7 +7,7 @@ It supplies the Front-End with a GraphQL server to provide all data the FE.
 
 ## Installation
 
-**Prerequisits**: Install Node 10 or later (check by running `node -v`).
+**Prerequisite**: Install Node 12 or later (check by running `node -v`).
 
 Next, install all dependencies:
 
@@ -15,7 +15,7 @@ Next, install all dependencies:
 npm install
 ```
 
-Everytime the dependencies change (ie `package.json` is updated), you'll need to
+Every time the dependencies change (ie `package.json` is updated), you'll need to
 re-run this command.
 
 ## Start Dev Server
@@ -23,7 +23,11 @@ re-run this command.
 To start a dev server, run the following command:
 
 ```
-npm start
+yarn | npm start
+```
+
+```
+yarn | npm server
 ```
 
 The server will start, and restart automatically when it detects changes, on
